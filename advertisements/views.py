@@ -4,6 +4,7 @@ from rest_framework import status
 from advertisements import serializers
 from advertisements.filters import AdvertisementFilter
 from rest_framework.response import Response
+from django_filters import rest_framework as filters
 
 from advertisements.models import Advertisement
 from advertisements.serializers import AdvertisementSerializer
@@ -16,6 +17,7 @@ class AdvertisementViewSet(ModelViewSet):
     #   сериализаторов и фильтров
     queryset = Advertisement.objects.all()
     serializer_class = AdvertisementSerializer
+    filter_backends = [filters.DjangoFilterBackend]
     filterset_class = AdvertisementFilter
 
     def destroy(self, request, *args, **kwargs):
